@@ -22,7 +22,7 @@
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/quizrizz.git
+   git clone https://github.com/Harsh-Dagar/quizrizz.git
    cd quizrizz
 
 
