@@ -1,0 +1,6 @@
+[build]
+  command = "npm install && npm run build"  # This installs node modules and builds your project
+  publish = "dist"  # Adjust if needed depending on where your build output goes
+
+[context.production.environment]
+  NODE_VERSION = "16"  # or whichever version of Node.js you are using

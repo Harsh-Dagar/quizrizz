@@ -1,5 +1,2 @@
-react
-react-dom
-react-router-dom
-axios
-node-sass
+react==4.3.0
+react-dom==18.2.0
