@@ -17,7 +17,7 @@ const QuizPage = () => {
   const [visitedQuestions, setVisitedQuestions] = useState(new Set([0]));
   const [timeLeft, setTimeLeft] = useState(() => {
     const savedTime = sessionStorage.getItem('timeLeft');
-    return savedTime ? parseInt(savedTime) : 5;
+    return savedTime ? parseInt(savedTime) : 30*60;
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
