@@ -1,0 +1,101 @@
+/* Container for navigation panel */
+.navigation-panel {
+    background-color: #f0f2f5; /* Subtle light background */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    width: 80%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    /* Center align the heading and ensure clean design */
+}
+
+/* Heading Style for Quiz Navigation */
+.navigation-heading {
+    font-size: 1.8rem; /* Larger size for more prominence */
+    font-weight: 600; /* Bold weight for a stronger title */
+    color: #333; /* Darker color for the heading */
+    margin-bottom: 20px; /* Increased margin for spacing */
+    letter-spacing: 1px; /* Slight letter spacing for a modern look */
+    text-transform: uppercase; /* Uppercase for more visual impact */
+    border-bottom: 3px solid #3f51b5; /* Underline with a color for emphasis */
+    padding-bottom: 5px; /* Padding for spacing under the line */
+}
+
+/* Styling for the list of questions */
+.navigation-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    gap: 12px; /* Spacing between the bubbles */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    margin-top: 10px;
+}
+
+/* Styling for each question item (set to square shape) */
+.navigation-item {
+    background-color: #9e9e9e; /* Default gray for unvisited */
+    color: white;
+    padding: 12px 18px; /* Adjust padding to make the item square */
+    border-radius: 0; /* No rounding to make it square */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 40px; /* Fixed width */
+    height: 40px; /* Fixed height to make it square */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hover effects */
+.navigation-item:hover {
+    transform: scale(1.1);
+    background-color: #8e8e8e; /* Darken on hover */
+}
+
+/* Active question style */
+.navigation-item.active {
+    background-color: #3f51b5; /* Blue for active question */
+}
+
+.navigation-item.active:hover {
+    background-color: #303f9f; /* Slightly darker shade for active item hover */
+}
+
+/* Styling for the container that wraps all the navigation items on smaller screens */
+@media (max-width: 768px) {
+    .navigation-list {
+        justify-content: center; /* Center align on smaller screens */
+        overflow-x: auto; /* Allow horizontal scroll on mobile */
+    }
+
+    .navigation-list::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .navigation-list::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 10px;
+    }
+
+    .navigation-list::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+}
+
+@media (max-width: 480px) {
+    .navigation-item {
+        font-size: 0.9rem; /* Smaller font size for smaller screens */
+        padding: 10px 14px; /* Adjusted padding for smaller screens */
+        width: 35px; /* Adjusted width for smaller screens */
+        height: 35px; /* Adjusted height for smaller screens */
+    }
+}
