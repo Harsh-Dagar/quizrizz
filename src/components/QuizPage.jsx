@@ -10,18 +10,16 @@ const QuizPage = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState(() => {
-    // Load answers from localStorage if they exist
     const savedAnswers = localStorage.getItem('userAnswers');
     return savedAnswers ? JSON.parse(savedAnswers) : {};
   });
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
   const [visitedQuestions, setVisitedQuestions] = useState(new Set([0]));
   const [timeLeft, setTimeLeft] = useState(() => {
-    // Load time from sessionStorage, or set to 30 minutes if not available
     const savedTime = sessionStorage.getItem('timeLeft');
     return savedTime ? parseInt(savedTime) : 30 * 60;
   });
-
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +30,7 @@ const QuizPage = () => {
         options: shuffleArray([...question.incorrect_answers, question.correct_answer]),
       }));
       setQuestions(data);
+      setLoading(false);
     };
 
     fetchQuestions();
@@ -46,7 +45,6 @@ const QuizPage = () => {
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
         const newTime = prev - 1;
-        // Store time in sessionStorage
         sessionStorage.setItem('timeLeft', newTime);
         return newTime;
       });
@@ -60,7 +58,6 @@ const QuizPage = () => {
         ...prev,
         [questionIndex]: answer,
       };
-      // Save updated answers in localStorage
       localStorage.setItem('userAnswers', JSON.stringify(updatedAnswers));
       return updatedAnswers;
     });
@@ -75,7 +72,6 @@ const QuizPage = () => {
   const handleSubmitQuiz = () => {
     const confirmSubmit = window.confirm("Do you want to submit the quiz?");
     if (confirmSubmit) {
-      // Clear sessionStorage time
       sessionStorage.removeItem('timeLeft');
       navigate('/report', { state: { questions, answers: userAnswers } });
     }
@@ -89,7 +85,12 @@ const QuizPage = () => {
   return (
     <div className="quiz-page-container">
       <Timer timeLeft={timeLeft} totalTime={30 * 60} />
-      {questions.length > 0 && (
+      
+      {loading ? (
+        <div className="loader">
+          <div className="spinner"></div> {/* Fancy spinner */}
+        </div>
+      ) : (
         <div className="quiz-content">
           <QuestionCard
             question={questions[currentQuestionIndex]}
