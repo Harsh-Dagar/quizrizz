@@ -17,7 +17,7 @@ const QuizPage = () => {
   const [visitedQuestions, setVisitedQuestions] = useState(new Set([0]));
   const [timeLeft, setTimeLeft] = useState(() => {
     const savedTime = sessionStorage.getItem('timeLeft');
-    return savedTime ? parseInt(savedTime) : 30 * 60;
+    return savedTime ? parseInt(savedTime) : 5;
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -39,9 +39,6 @@ const QuizPage = () => {
   const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
   useEffect(() => {
-    if (timeLeft === 0) {
-      handleSubmitQuiz();
-    }
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
         const newTime = prev - 1;
@@ -77,6 +74,12 @@ const QuizPage = () => {
     }
   };
 
+  const handleTimesUp = () => {
+    alert("Time's up!");
+    sessionStorage.removeItem('timeLeft');
+    navigate('/report', { state: { questions, answers: userAnswers } });
+  };
+
   const handleNextQuestion = () => {
     const nextIndex = Math.min(currentQuestionIndex + 1, questions.length - 1);
     handleQuestionVisit(nextIndex);
@@ -84,11 +87,11 @@ const QuizPage = () => {
 
   return (
     <div className="quiz-page-container">
-      <Timer timeLeft={timeLeft} totalTime={30 * 60} />
+      <Timer timeLeft={timeLeft} totalTime={30 * 60} onTimeUp={handleTimesUp} />
       
       {loading ? (
         <div className="loader">
-          <div className="spinner"></div> {/* Fancy spinner */}
+          <div className="spinner"></div>
         </div>
       ) : (
         <div className="quiz-content">

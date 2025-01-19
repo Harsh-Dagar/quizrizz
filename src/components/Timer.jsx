@@ -10,7 +10,9 @@ const Timer = ({ timeLeft, totalTime, onTimeUp }) => {
     // Update progress every second
     useEffect(() => {
         if (timeLeft <= 0) {
-            onTimeUp();  // Call parent function when time is up
+            if (typeof onTimeUp === 'function') {
+                onTimeUp();  // Call parent function when time is up
+            }
             return;
         }
 
