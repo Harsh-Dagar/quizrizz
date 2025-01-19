@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/QuestionCard.css'; // Import the styles for QuestionCard
+import '../styles/QuestionCard.css'; // Import the styles for QuestionCard
 
 const decodeHtml = (html) => {
   const textArea = document.createElement('textarea');
