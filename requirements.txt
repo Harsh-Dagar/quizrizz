@@ -1,4 +1,0 @@
-react
-react-router-dom
-axios
-node-sass
